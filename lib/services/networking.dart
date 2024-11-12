@@ -7,15 +7,20 @@ class NetworkHelper {
   final String url;
 
   Future<dynamic> getData() async {
-    final response = await dio.get(url);
+    try {
+      final response = await dio.get(url);
 
-    if (response.statusCode == 200) {
-      final data = response.data;
+      if (response.statusCode == 200) {
+        final data = response.data;
 
-      return data;
-    } else {
-      print(response.statusCode);
-      return null;
+        return data;
+      } else {
+        print(response.statusCode);
+        return null;
+      }
+    } catch(e) {
+      print('Error: $e');
     }
+
   }
 }
