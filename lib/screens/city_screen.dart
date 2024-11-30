@@ -7,7 +7,9 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+  TextEditingController textEditingController = TextEditingController();
   String? cityName;
+  GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +39,37 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child: TextField(
-                  style: TextStyle(
-                    color: Colors.black,
+                child: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    controller: textEditingController,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                    decoration: kTextFieldInputDecoration,
+                    onChanged: (value) {
+                      // print('onChanged: $value');
+                      cityName = value;
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "This field is not empty";
+                      }
+                      return null;
+                    },
+                    // onSubmitted: (value) {
+                    //   print('onSubmitted: $value');
+                    // },
                   ),
-                  decoration: kTextFieldInputDecoration,
-                  onChanged: (value) {
-                    cityName = value;
-                  },
                 ),
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context, cityName);
+                  if (_formKey.currentState!.validate()) {
+                    // print('${textEditingController.text}');
+                    Navigator.pop(context, cityName);
+                  }
+
                 },
                 child: Text(
                   'Get Weather',

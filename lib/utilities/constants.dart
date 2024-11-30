@@ -26,6 +26,8 @@ const kTextFieldInputDecoration = InputDecoration(
     Icons.location_city,
     color: Colors.white,
   ),
+  // labelText: "City Name",
+  // labelStyle:TextStyle(color: Colors.red) ,
   hintText: 'Enter City Name',
   hintStyle: TextStyle(
     color: Colors.grey,
@@ -36,4 +38,5 @@ const kTextFieldInputDecoration = InputDecoration(
     ),
     borderSide: BorderSide.none,
   ),
+  errorStyle: TextStyle(fontSize: 9, color: Colors.red)
 );
